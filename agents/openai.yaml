@@ -1,0 +1,4 @@
+interface:
+  display_name: "SuperReview"
+  short_description: "Main-agent code review with atomic delegated repairs"
+  default_prompt: "Use $superreview to personally review this PR or local change set, delegate each confirmed finding as an atomic repair, and verify the final effective diff yourself."
