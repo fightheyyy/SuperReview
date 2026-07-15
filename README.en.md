@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="./assets/superreview-icon.svg" width="104" alt="SuperReview icon">
+
 # SuperReview
 
 ### The main agent owns judgment. Subagents only repair.
@@ -155,6 +157,8 @@ Those actions require explicit user authorization.
 
 - [`SKILL.md`](./SKILL.md): the complete SuperReview workflow and ownership invariant.
 - [`agents/openai.yaml`](./agents/openai.yaml): Codex display and invocation metadata.
+- [`assets/superreview-icon.svg`](./assets/superreview-icon.svg): the primary review-lens and final-verdict mark.
+- [`docs/social-preview.png`](./docs/social-preview.png): the GitHub repository social preview.
 - [`README.md`](./README.md): Chinese documentation.
 
 If you believe **review judgment belongs to the main agent and subagents should perform bounded repairs**, star the repository and help more AI-assisted development teams discover this workflow.

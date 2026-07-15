@@ -1,0 +1,8 @@
+<svg width="512" height="512" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">SuperReview icon</title>
+  <desc id="desc">A violet review lens containing a green final-verdict check</desc>
+  <rect x="3" y="3" width="94" height="94" rx="24" fill="#0B0D10"/>
+  <rect x="3" y="3" width="94" height="94" rx="24" fill="none" stroke="#262A33" stroke-width="2"/>
+  <path d="M15 51C24 35 36 28 50 28s26 7 35 23c-9 16-21 23-35 23S24 67 15 51Z" fill="none" stroke="#A78BFA" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m37 51 9 9 18-21" fill="none" stroke="#4ADE80" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

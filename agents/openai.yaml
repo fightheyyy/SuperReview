@@ -1,4 +1,6 @@
 interface:
   display_name: "SuperReview"
   short_description: "Main-agent code review with atomic delegated repairs"
+  icon_small: "./assets/superreview-icon.png"
+  icon_large: "./assets/superreview-icon.svg"
   default_prompt: "Use $superreview to personally review this PR or local change set, delegate each confirmed finding as an atomic repair, and verify the final effective diff yourself."

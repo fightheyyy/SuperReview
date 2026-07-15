@@ -1,0 +1,33 @@
+<svg width="1280" height="640" viewBox="0 0 1280 640" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">SuperReview — Main-agent review, atomic subagent repairs</title>
+  <desc id="desc">GitHub social preview for the SuperReview Codex skill</desc>
+  <defs>
+    <radialGradient id="violetGlow" cx="0" cy="0" r="1" gradientTransform="translate(246 116) rotate(45) scale(520)">
+      <stop stop-color="#7C3AED" stop-opacity="0.34"/>
+      <stop offset="1" stop-color="#7C3AED" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="greenGlow" cx="0" cy="0" r="1" gradientTransform="translate(1120 610) rotate(-135) scale(430)">
+      <stop stop-color="#16A34A" stop-opacity="0.24"/>
+      <stop offset="1" stop-color="#16A34A" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1280" height="640" rx="32" fill="#0B0D10"/>
+  <rect width="1280" height="640" rx="32" fill="url(#violetGlow)"/>
+  <rect width="1280" height="640" rx="32" fill="url(#greenGlow)"/>
+  <g transform="translate(96 174) scale(2.92)">
+    <rect x="3" y="3" width="94" height="94" rx="24" fill="#12151B"/>
+    <rect x="3" y="3" width="94" height="94" rx="24" fill="none" stroke="#303541" stroke-width="2"/>
+    <path d="M15 51C24 35 36 28 50 28s26 7 35 23c-9 16-21 23-35 23S24 67 15 51Z" fill="none" stroke="#A78BFA" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="m37 51 9 9 18-21" fill="none" stroke="#4ADE80" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <text x="438" y="270" fill="#F8FAFC" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="78" font-weight="650" letter-spacing="-2">SuperReview</text>
+  <text x="442" y="332" fill="#A78BFA" font-family="JetBrains Mono, ui-monospace, monospace" font-size="22" letter-spacing="2">MAIN AGENT OWNS THE VERDICT</text>
+  <text x="442" y="397" fill="#A7ADB8" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="29" font-weight="400">Review first. Delegate atomic repairs.</text>
+  <text x="442" y="439" fill="#A7ADB8" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="29" font-weight="400">Verify every patch and the final diff.</text>
+  <g transform="translate(442 495)">
+    <rect width="162" height="42" rx="21" fill="#7C3AED" fill-opacity="0.18" stroke="#A78BFA" stroke-opacity="0.44"/>
+    <text x="81" y="28" text-anchor="middle" fill="#C4B5FD" font-family="JetBrains Mono, ui-monospace, monospace" font-size="15">CODEX SKILL</text>
+    <rect x="180" width="198" height="42" rx="21" fill="#16A34A" fill-opacity="0.16" stroke="#4ADE80" stroke-opacity="0.4"/>
+    <text x="279" y="28" text-anchor="middle" fill="#86EFAC" font-family="JetBrains Mono, ui-monospace, monospace" font-size="15">ATOMIC REPAIRS</text>
+  </g>
+</svg>

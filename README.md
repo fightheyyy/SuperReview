@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="./assets/superreview-icon.svg" width="104" alt="SuperReview 图标">
+
 # SuperReview
 
 ### 主 agent 负责判断，subagent 只负责修
@@ -155,6 +157,8 @@ SuperReview 默认不会：
 
 - [`SKILL.md`](./SKILL.md)：SuperReview 的完整工作流和 ownership invariant。
 - [`agents/openai.yaml`](./agents/openai.yaml)：Codex 展示与默认调用元数据。
+- [`assets/superreview-icon.svg`](./assets/superreview-icon.svg)：主标志，review lens + final verdict。
+- [`docs/social-preview.png`](./docs/social-preview.png)：GitHub 仓库社交预览图。
 - [`README.en.md`](./README.en.md)：English documentation。
 
 如果你也认为 **review judgment 应该留在主 agent，subagent 应该只做原子修复**，欢迎点一个 Star，让更多 AI-assisted development 项目看到这套工作方式。
