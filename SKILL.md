@@ -20,6 +20,42 @@ review judgment, finding quality, patch acceptance, final verification, and the
 final verdict with the main agent. Use subagents only as bounded repair workers
 after the main agent has confirmed actionable findings.
 
+## Model and Intelligence Policy
+
+Enforce this role-specific model split before substantive review work:
+
+- Run the main reviewer on `gpt-5.6-sol` with **Ultra**. Use this profile for
+  task analysis, boundary discovery, the complete initial review, finding and
+  priority decisions, repair acceptance, final verification, and the verdict.
+- Run every repair worker through the `superreview-repair` custom agent on
+  `gpt-5.6-sol` with **Extra High** reasoning (`model_reasoning_effort =
+  "xhigh"`).
+- Do not let Ultra's proactive delegation bypass the ownership invariant. The
+  main agent must still finish the initial review and freeze findings before any
+  repair worker starts.
+
+Apply this model gate:
+
+1. Inspect the selected main-session model and intelligence level when the
+   surface exposes them.
+2. If the main session is not `gpt-5.6-sol` + Ultra, stop before Phase 1 and ask
+   the user to select that profile. If the surface cannot inspect or change the
+   selection, state `Main model policy unverified`; do not silently claim
+   compliance or begin repair mode.
+3. Before dispatch, require the named `superreview-repair` custom agent. Select
+   that profile explicitly when the spawn surface supports agent types or
+   profiles.
+4. If the repair profile is unavailable or the spawn surface cannot select it,
+   do not substitute a generic worker. Keep the confirmed findings report-only
+   and report `Repair model policy blocked` with the missing capability.
+5. Let an explicit user model override win, but record the deviation in the
+   final report.
+
+The distributable repair profile lives at
+`agents/superreview-repair.toml`. Install it as
+`~/.codex/agents/superreview-repair.toml` for a personal agent or
+`.codex/agents/superreview-repair.toml` for a project-scoped agent.
+
 ## Ownership Invariant
 
 The main agent must:
@@ -133,6 +169,7 @@ Start every repair message with `Repair:` and include:
 ```md
 Repair: <finding ID and one-sentence objective>
 Parent Review: <review-target identity, comparison boundary, and priority>
+Worker Profile: superreview-repair (gpt-5.6-sol, xhigh / Extra High)
 Finding Evidence: <failure, cause, location, and reproduction conditions>
 Acceptance: <observable condition that closes this finding>
 Allowed Scope: <exact files/modules the worker may inspect or edit>
@@ -151,9 +188,9 @@ Goal Contract and require the child `create_goal` / `update_goal` lifecycle.
 SuperReview's `Repair:` boundary remains mandatory; SuperGoal adds lifecycle
 tracking but does not delegate review ownership.
 
-If subagent tools are unavailable, state the fallback. In review-and-repair
-mode, the main agent may apply the smallest confirmed repairs sequentially; do
-not pretend delegation occurred.
+If subagent tools or the required repair profile are unavailable, stop repair
+dispatch and state the blocker. Do not replace the required Extra High worker
+with a generic subagent or a silent main-agent implementation.
 
 ## Phase 4: Accept or Reject Every Repair
 
@@ -221,6 +258,8 @@ Lead with the verdict, then report:
 - Findings by priority, each with status and tight code references.
 - Repairs delegated, accepted, rejected, withdrawn, or blocked.
 - Verification commands and outcomes.
+- Model-policy evidence for the main reviewer and repair workers, including any
+  unverified or user-overridden selection.
 - Residual risks, missing context, and unrun checks.
 - Publication state: local only, or the exact explicitly authorized GitHub/git
   actions completed.

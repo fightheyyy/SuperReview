@@ -47,6 +47,17 @@ flowchart LR
 
 The core gate is strict: **no repair delegation before the main agent completes the initial review and freezes its findings.**
 
+## Model split
+
+| Role | Model | Intelligence / reasoning | Responsibility |
+|---|---|---|---|
+| Main reviewer | `gpt-5.6-sol` | **Ultra** | Analyze the task, complete the initial review, establish findings, accept patches, and own the verdict |
+| Repair subagent | `gpt-5.6-sol` | **Extra High** (`xhigh`) | Repair exactly one confirmed finding |
+
+Ultra makes the main agent more proactive about delegation, but it does not override SuperReview's ownership gate: **no spawn before the initial review and finding freeze are complete.**
+
+Repairs use the bundled [`superreview-repair`](./agents/superreview-repair.toml) custom agent. If the runtime cannot select that agent profile, SuperReview keeps the findings report-only and reports the blocker instead of silently using a generic worker.
+
 ## Why it exists
 
 | Common failure | SuperReview constraint |
@@ -89,7 +100,11 @@ Install the repository as a Codex skill:
 
 ```bash
 git clone https://github.com/fightheyyy/SuperReview.git ~/.codex/skills/superreview
+mkdir -p ~/.codex/agents
+cp ~/.codex/skills/superreview/agents/superreview-repair.toml ~/.codex/agents/superreview-repair.toml
 ```
+
+Before starting a new task, select **GPT-5.6 Sol + Ultra** in the Codex composer. The bundled custom-agent TOML pins repair workers to `gpt-5.6-sol` + `xhigh`.
 
 Invoke it in Codex:
 
@@ -157,6 +172,7 @@ Those actions require explicit user authorization.
 
 - [`SKILL.md`](./SKILL.md): the complete SuperReview workflow and ownership invariant.
 - [`agents/openai.yaml`](./agents/openai.yaml): Codex display and invocation metadata.
+- [`agents/superreview-repair.toml`](./agents/superreview-repair.toml): the GPT-5.6 Sol + Extra High atomic repair agent.
 - [`assets/superreview-icon.svg`](./assets/superreview-icon.svg): the primary review-lens and final-verdict mark.
 - [`docs/social-preview.png`](./docs/social-preview.png): the GitHub repository social preview.
 - [`README.md`](./README.md): Chinese documentation.

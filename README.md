@@ -47,6 +47,17 @@ flowchart LR
 
 关键门槛只有一个：**主 agent 完成首轮 review 并冻结 findings 之前，不允许把 review 分派出去。**
 
+## 模型分工
+
+| 角色 | 模型 | Intelligence / Reasoning | 职责 |
+|---|---|---|---|
+| Main reviewer | `gpt-5.6-sol` | **Ultra** | 分析任务、完整首审、确定 findings、验收补丁、最终 verdict |
+| Repair subagent | `gpt-5.6-sol` | **Extra High**（`xhigh`） | 只修一个已确认的 finding |
+
+Ultra 会让主 agent 更主动地调用 subagent，但不能越过 SuperReview 的 ownership gate：**首审和 findings 冻结之前仍然禁止 spawn。**
+
+修复使用仓库自带的 [`superreview-repair`](./agents/superreview-repair.toml) custom agent。若运行时无法选择这个 agent profile，SuperReview 保持 findings 为 report-only 并明确报告 blocker，不会悄悄换成普通 worker。
+
 ## 为什么需要它
 
 | 常见问题 | SuperReview 的约束 |
@@ -89,7 +100,11 @@ flowchart LR
 
 ```bash
 git clone https://github.com/fightheyyy/SuperReview.git ~/.codex/skills/superreview
+mkdir -p ~/.codex/agents
+cp ~/.codex/skills/superreview/agents/superreview-repair.toml ~/.codex/agents/superreview-repair.toml
 ```
+
+开始新 task 前，在 Codex composer 里选择 **GPT-5.6 Sol + Ultra**。Extra High repair agent 已由上面的 TOML 固定为 `gpt-5.6-sol` + `xhigh`。
 
 然后在 Codex 中调用：
 
@@ -157,6 +172,7 @@ SuperReview 默认不会：
 
 - [`SKILL.md`](./SKILL.md)：SuperReview 的完整工作流和 ownership invariant。
 - [`agents/openai.yaml`](./agents/openai.yaml)：Codex 展示与默认调用元数据。
+- [`agents/superreview-repair.toml`](./agents/superreview-repair.toml)：固定为 GPT-5.6 Sol + Extra High 的原子修复 agent。
 - [`assets/superreview-icon.svg`](./assets/superreview-icon.svg)：主标志，review lens + final verdict。
 - [`docs/social-preview.png`](./docs/social-preview.png)：GitHub 仓库社交预览图。
 - [`README.en.md`](./README.en.md)：English documentation。
